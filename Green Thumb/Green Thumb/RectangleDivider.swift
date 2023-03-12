@@ -12,5 +12,6 @@ struct RectangleDivider: View {
         Rectangle()
             .frame(height: 2)
             .foregroundColor(.white)
+            .padding(.vertical)
     }
 }

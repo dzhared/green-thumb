@@ -9,44 +9,79 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    
+    @State var showingPlantView = false
+    @State var showingAddPlantView = false
+    @State var showingCollectionView = false
+    @StateObject var userPlants = UserPlants()
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
+    let plants: [String: Plant] = Bundle.main.decode("plants.json")
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            ScrollView {
+                LazyVStack(spacing: 4) {
+//                    ForEach($userPlants) { plant in
+                    ForEach(Array(plants.values).sorted { $0.name < $1.name } ) { plant in
+                        PlantBadge(plant: plant)
+                            .padding(.horizontal)
+                            .sheet(isPresented: $showingPlantView) {
+                                PlantDetailView(plant: plant)
+                            }
+                    }
+                    .onTapGesture {
+                        showingPlantView = true
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
+            .background(Color.darkGreen)
+            .preferredColorScheme(.dark)
+            .navigationTitle("Plant Party")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        showingCollectionView = true
+                    }) {
+                        HStack {
+                            Image(systemName: "leaf")
+                            Text("My Plants")
+                            Spacer()
+                        }
+                    }
+                    .sheet(isPresented: $showingCollectionView) {
+                        CollectionView()
+                    }
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingAddPlantView = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Add")
+                            Image(systemName: "plus.circle")
+                        }
+                    }
+                    .sheet(isPresented: $showingAddPlantView) {
+                        AddPlantView(userPlants: UserPlants())
                     }
                 }
             }
-            Text("Select an item")
         }
     }
-
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
-
+            
             do {
                 try viewContext.save()
             } catch {
@@ -57,11 +92,11 @@ struct ContentView: View {
             }
         }
     }
-
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
-
+            
             do {
                 try viewContext.save()
             } catch {

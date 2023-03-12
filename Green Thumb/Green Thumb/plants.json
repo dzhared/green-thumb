@@ -1,2 +1,51 @@
-#  <#Title#>
-
+{
+    "calathea": {
+        "id": "calathea",
+        "name": "Calathea",
+        "description": "This is a description of a Calathea. They're beautiful but they suck shit.",
+        "wateringRequirements": "Watering requirements",
+        "growingMedium": "Growing medium"
+    },
+    "snakePlant": {
+        "id": "snakePlant",
+        "name": "Snake Plant",
+        "description": "The snake plant is an evergreen perennial plant forming dense stands, spreading by way of its creeping rhizome, which is sometimes above ground, sometimes underground. Its stiff leaves grow vertically from a basal rosette. Mature leaves are dark green with light gray-green cross-banding and usually range from 70–90 centimetres (2.3–3.0 ft) long and 5–6 centimetres (2.0–2.4 in) wide, though it can reach heights above 2 m (6 ft) in optimal conditions.",
+        "wateringRequirements": "Watering requirements",
+        "growingMedium": "Growing medium"
+    },
+    "africanViolet": {
+        "id": "africanViolet",
+        "name": "African Violet",
+        "description": "African violets (Saintpaulia ionantha) are low maintenance, easy to grow houseplants. They reliably bloom several times a year when cared for properly.\n\nNative to Eastern Africa, these popular houseplants are in the same family (Gesneriaceae) as gloxinia and primrose.",
+        "wateringRequirements": "Do not use softened or chlorinated water for African violets. Use room-temperature distilled water, rain water or reverse-osmosis water. Keep the potting mix moist at all times, but not soggy, and never let your plant sit in water.\n\nRoot rot from over watering is one of the most common reasons African violets die.",
+        "growingMedium": "African violets have fine roots and require well-drained soilless potting mixes with a pH of about 6.2 - 6.5.\n\nPre-mixed commercial blends high in peat are available at most retail garden centers.\n\nSome growers recommend a blend of 50% commercial African violet potting mix and 50% perlite.\n\nPlanting containers should have one or more holes in the bottom that allow excess water to drain. Never allow the plant to sit in water.\n\nRe-pot plants in fresh potting mix once a year."
+    },
+    "ivy": {
+        "id": "ivy",
+        "name": "Ivy",
+        "description": "This is a description of ivy. I like ivy!",
+        "wateringRequirements": "Watering requirements",
+        "growingMedium": "Growing medium"
+    },
+    "spiderPlant": {
+        "id": "spiderPlant",
+        "name": "Spider Plant",
+        "description": "This is a description of a spider plant.",
+        "wateringRequirements": "Watering requirements",
+        "growingMedium": "Growing medium"
+    },
+    "pothos": {
+        "id": "pothos",
+        "name": "Pothos",
+        "description": "This is a description of a pothos plant.",
+        "wateringRequirements": "Watering requirements",
+        "growingMedium": "Growing medium"
+    },
+    "dracaena": {
+        "id": "dracaena",
+        "name": "Dracaena",
+        "description": "This is a description of a dracaena.",
+        "wateringRequirements": "Watering requirements",
+        "growingMedium": "Growing medium"
+    }
+}
