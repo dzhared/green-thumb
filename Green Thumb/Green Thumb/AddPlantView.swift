@@ -33,29 +33,49 @@ struct AddPlantView: View {
     var body: some View {
         NavigationView {
             Form {
-                // TODO: Is there a more elegant way to do this?
-                Picker("Plant", selection: $name) {
-                    ForEach(plantIDs, id: \.self) { plantID in
-                        Text(plants[plantID]!.name)
+                Section {
+                    // TODO: Is there a more elegant way to do this?
+                    Picker("Species", selection: $name) {
+                        ForEach(plantIDs, id: \.self) { plantID in
+                            Text(plants[plantID]!.name)
+                        }
+                    }
+                    TextField("Nickname", text: $nickName)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.words)
+                        .keyboardType(.default)
+                    TextField("Description", text: $description)
+                        .keyboardType(.default)
+                }
+                Section {
+                    // Add ML image ID functionality
+                    Button(action: {  }) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "camera")
+                            Text("Visual ID")
+                            Spacer()
+                        }
                     }
                 }
-                TextField("Nickname", text: $nickName)
-                    .autocorrectionDisabled()
-                    .autocapitalization(.words)
-                    .keyboardType(.default)
-                TextField("Description", text: $description)
-                    .keyboardType(.default)
             }
             .navigationTitle("Add a Plant")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                Button("Save") {
-                    // "name: name" is entering plantID, not name, into new entry
-                    print(plants["\(name)"] ?? "Calathea")
-                    
-                    let newPlant = UserPlant(name: name, nickName: nickName, description: description)
-                    userPlants.plants.append(newPlant)
-                    dismiss()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        // "name: name" is entering plantID, not name, into new entry
+                        print(plants["\(name)"] ?? "Calathea")
+                        
+                        let newPlant = UserPlant(name: name, nickName: nickName, description: description)
+                        userPlants.plants.append(newPlant)
+                        dismiss()
+                    }
                 }
             }
         }

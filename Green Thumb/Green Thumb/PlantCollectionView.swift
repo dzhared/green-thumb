@@ -11,6 +11,8 @@ struct CollectionView: View {
     
     @StateObject var plants = UserPlants()
     @State var showingAddView = false
+    @State var showingPlantView = false
+    @Environment(\.dismiss) var dismiss
     
     func removeItems(at offsets: IndexSet) {
         plants.plants.remove(atOffsets: offsets)
@@ -18,7 +20,7 @@ struct CollectionView: View {
     
     var body: some View {
         NavigationView {
-            List {
+            Form {
                 // id: \.name is used when every item is sure to have a unique name
                 // Do not need "id: \.id" if struct is designated Identifiable
                 Section(header: Text("My Plants")) {
@@ -48,8 +50,15 @@ struct CollectionView: View {
             .background(Color.darkGreen)
             .navigationTitle("My Plants")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar() {
-                EditButton()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
             }
         }
         

@@ -16,6 +16,7 @@ struct PlantDetailView: View {
     let plant: Plant
     
     var body: some View {
+        
         ScrollView {
             VStack(spacing: 10) {
                 Group {

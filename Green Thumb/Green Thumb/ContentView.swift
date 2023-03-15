@@ -27,7 +27,6 @@ struct ContentView: View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 4) {
-//                    ForEach($userPlants) { plant in
                     ForEach(Array(plants.values).sorted { $0.name < $1.name } ) { plant in
                         PlantBadge(plant: plant)
                             .padding(.horizontal)
@@ -42,35 +41,34 @@ struct ContentView: View {
             }
             .background(Color.darkGreen)
             .preferredColorScheme(.dark)
-            .navigationTitle("Plant Party")
+            .navigationTitle("Green Thumb")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        showingCollectionView = true
-                    }) {
-                        HStack {
-                            Image(systemName: "leaf")
-                            Text("My Plants")
-                            Spacer()
-                        }
-                    }
-                    .sheet(isPresented: $showingCollectionView) {
-                        CollectionView()
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         showingAddPlantView = true
                     }) {
                         HStack {
                             Spacer()
-                            Text("Add")
                             Image(systemName: "plus.circle")
                         }
                     }
                     .sheet(isPresented: $showingAddPlantView) {
                         AddPlantView(userPlants: UserPlants())
+                    }
+                }
+                // Change to open PlantCollectionView as screen, not sheet
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingCollectionView = true
+                    }) {
+                        HStack {
+                            Image(systemName: "leaf")
+                            Spacer()
+                        }
+                    }
+                    .sheet(isPresented: $showingCollectionView) {
+                        CollectionView()
                     }
                 }
             }
