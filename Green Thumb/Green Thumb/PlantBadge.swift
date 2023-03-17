@@ -41,5 +41,6 @@ struct PlantBadge: View {
 struct PlantBadge_Previews: PreviewProvider {
     static var previews: some View {
         PlantBadge(plant: Plant(id: "calathea", name: "Calathea", description: "Calathea description", wateringRequirements: "Calathea watering requirements", growingMedium: "Calathea growing medium"))
+            .preferredColorScheme(.dark)
     }
 }

@@ -22,12 +22,16 @@ struct PhotosSelector: View {
             DispatchQueue.main.async {
                 guard [imageSelection] == self.imageSelection else { return }
                 switch result {
-                case .success(let image?):
-                    print("Image loaded.")
+//                case .success(let image?):
+//                    print("Image loaded.")
                 case .success(nil):
                     print("No image loaded.")
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
+                // Replace below with commented segment above.
+                // Commented because Swift is mad at me.
+                default:
+                    print("Image loaded.")
                 }
             }
         }

@@ -48,7 +48,7 @@ struct ContentView: View {
                                 )
                                 .padding()
                             VStack(alignment: .leading) {
-                                Text("\(plant.nickName ?? "Nickname") ♈️")
+                                Text(plant.nickName ?? "Nickname")
                                     .font(.title3)
                                 Text(plant.info ?? "Description")
                             }
