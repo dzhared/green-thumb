@@ -61,41 +61,6 @@ struct CollectionView: View {
                 }
             }
         }
-        
-        
-        
-        
-        
-        //        NavigationView {
-        //            ScrollView {
-        //                LazyVStack(spacing: 4) {
-        //                    ForEach(plants.plants) { plant in
-        //                        HStack {
-        //                            Text(plant.nickName)
-        //                            Text(plant.name)
-        //                                .font(.headline)
-        //                                .foregroundColor(.white)
-        //                        }
-        //                        .padding(.vertical)
-        //                        .frame(maxWidth: .infinity, maxHeight: 70)
-        //                        .background(.ultraThinMaterial)
-        //                        .clipShape(RoundedRectangle(cornerRadius: 10))
-        //                        .overlay(
-        //                            RoundedRectangle(cornerRadius: 10)
-        //                                .strokeBorder(.white, lineWidth: 2)
-        //                        )
-        //                    }
-        //                }
-        //            }
-        //            .background(Color.darkGreen)
-        //            .preferredColorScheme(.dark)
-        //            .navigationTitle("My Plants")
-        //            .navigationBarTitleDisplayMode(.inline)
-        //            .toolbar() {
-        //                Button("Add Plant") { }
-        //                    .foregroundColor(.white)
-        //            }
-        //        }
     }
 }
 

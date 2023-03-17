@@ -49,7 +49,7 @@ struct AddPlantView: View {
                 }
                 Section {
                     // Add ML image ID functionality
-                    Button(action: {  }) {
+                    Button(action: { }) {
                         HStack {
                             Spacer()
                             Image(systemName: "camera")
