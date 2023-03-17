@@ -11,7 +11,6 @@ import Foundation
 struct PlantDetailView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State var showingAddPlantView = false
     
     let plant: Plant
     
@@ -20,7 +19,7 @@ struct PlantDetailView: View {
         ScrollView {
             VStack(spacing: 10) {
                 Group {
-                    Image(plant.id)
+                    Image(plant.name)
                         .resizable()
                         .scaledToFill()
                         .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -54,8 +53,10 @@ struct PlantDetailView: View {
         .foregroundColor(.white)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar() {
-            Button("Done") {
-                dismiss()
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Done") {
+                    dismiss()
+                }
             }
         }
     }

@@ -5,86 +5,77 @@
 //  Created by Jared on 3/10/23.
 //
 
+import CoreData
+import PhotosUI
 import SwiftUI
 
 struct AddPlantView: View {
     
-    @State private var nickName = ""
-    @State private var name: String = ""
-    @State private var description: String = ""
-    @ObservedObject var userPlants: UserPlants
+    @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let plants: [String: Plant] = Bundle.main.decode("plants.json")
-    var plantIDs: [String] {
-        Array(plants.keys).sorted()
-    }
+    @State private var nickName = ""
+    @State private var species: String = "African Violet"
+    @State private var info: String = ""
     
-    enum Plants: String {
-        case africanViolet = "African Violet"
-        case calathea = "Calathea"
-        case dracaena = "Dracaena"
-        case ivy = "Ivy"
-        case pothos = "Pothos"
-        case snakePlant = "Snake Plant"
-        case spiderPlant = "Spider Plant"
-    }
+    @State private var prediction: String?
+    @State var selectedItem: PhotosPickerItem?
+    
+    let predictor = ImagePredictor()
+    
+    let speciesOptions = ["African Violet", "Calathea", "Dracaena", "Ivy", "Pothos", "Snake Plant", "Spider Plant"]
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    // TODO: Is there a more elegant way to do this?
-                    Picker("Species", selection: $name) {
-                        ForEach(plantIDs, id: \.self) { plantID in
-                            Text(plants[plantID]!.name)
-                        }
-                    }
                     TextField("Nickname", text: $nickName)
                         .autocorrectionDisabled()
                         .autocapitalization(.words)
                         .keyboardType(.default)
-                    TextField("Description", text: $description)
+                    TextField("Description", text: $info)
                         .keyboardType(.default)
+                    Picker("Species", selection: $species) {
+                        ForEach(speciesOptions, id: \.self) {
+                            Text($0)
+                        }
+                    }
                 }
                 Section {
                     // Add ML image ID functionality
-                    Button(action: { }) {
+                    PhotosPicker(selection: $selectedItem) {
                         HStack {
                             Spacer()
                             Image(systemName: "camera")
-                            Text("Visual ID")
+                            Text("Select Photo")
                             Spacer()
                         }
                     }
                 }
-            }
-            .navigationTitle("Add a Plant")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                Section {
                     Button("Save") {
-                        // "name: name" is entering plantID, not name, into new entry
-                        print(plants["\(name)"] ?? "Calathea")
+                        // Add plant to library
+                        let newUserPlant = UserPlant(context: moc)
+                        newUserPlant.id = UUID()
+                        newUserPlant.nickName = nickName
+                        newUserPlant.info = info
+                        newUserPlant.species = species
                         
-                        let newPlant = UserPlant(name: name, nickName: nickName, description: description)
-                        userPlants.plants.append(newPlant)
+                        // Save and dismiss
+                        try? moc.save()
                         dismiss()
                     }
                 }
+                .navigationTitle("Add a Plant")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
 }
 
-
 struct AddPlantView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPlantView(userPlants: UserPlants())
+        AddPlantView()
     }
 }
+

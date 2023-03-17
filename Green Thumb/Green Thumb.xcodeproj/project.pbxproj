@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		7F1C50D929BA527C008780D0 /* plants.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F1C50D829BA527C008780D0 /* plants.json */; };
 		7F1C50DB29BA5A16008780D0 /* PlantBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50DA29BA5A16008780D0 /* PlantBadge.swift */; };
-		7F1C50DD29BA77C6008780D0 /* PlantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50DC29BA77C6008780D0 /* PlantCollectionView.swift */; };
+		7F1C50DD29BA77C6008780D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50DC29BA77C6008780D0 /* ContentView.swift */; };
 		7F274A5329C3D8FE004D2001 /* ImagePredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F274A5229C3D8FE004D2001 /* ImagePredictor.swift */; };
+		7F2BF04829C3E9C8007DDBE9 /* ImagePredictorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2BF04729C3E9C8007DDBE9 /* ImagePredictorButton.swift */; };
+		7F37C1FF29C4D98C0047E620 /* GreenThumb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */; };
+		7F37C20429C4DABC0047E620 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F37C20329C4DABC0047E620 /* DataController.swift */; };
 		7F48840F29C24CEF00611B4C /* PlantML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7F48840E29C24CEF00611B4C /* PlantML.mlmodel */; };
 		7F8CD16A29BB98CD0053D493 /* AddPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8CD16929BB98CD0053D493 /* AddPlantView.swift */; };
 		7FAC166E29B98F03001C51B9 /* Green_ThumbApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC166D29B98F03001C51B9 /* Green_ThumbApp.swift */; };
-		7FAC167029B98F03001C51B9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC166F29B98F03001C51B9 /* ContentView.swift */; };
+		7FAC167029B98F03001C51B9 /* ReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC166F29B98F03001C51B9 /* ReferenceView.swift */; };
 		7FAC167229B98F04001C51B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FAC167129B98F04001C51B9 /* Assets.xcassets */; };
 		7FAC167529B98F04001C51B9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FAC167429B98F04001C51B9 /* Preview Assets.xcassets */; };
 		7FAC168229B98F19001C51B9 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168129B98F19001C51B9 /* Plant.swift */; };
@@ -27,13 +30,16 @@
 /* Begin PBXFileReference section */
 		7F1C50D829BA527C008780D0 /* plants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plants.json; sourceTree = "<group>"; };
 		7F1C50DA29BA5A16008780D0 /* PlantBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantBadge.swift; sourceTree = "<group>"; };
-		7F1C50DC29BA77C6008780D0 /* PlantCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionView.swift; sourceTree = "<group>"; };
+		7F1C50DC29BA77C6008780D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7F274A5229C3D8FE004D2001 /* ImagePredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictor.swift; sourceTree = "<group>"; };
+		7F2BF04729C3E9C8007DDBE9 /* ImagePredictorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictorButton.swift; sourceTree = "<group>"; };
+		7F37C1FE29C4D98C0047E620 /* GreenThumb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenThumb.xcdatamodel; sourceTree = "<group>"; };
+		7F37C20329C4DABC0047E620 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		7F48840E29C24CEF00611B4C /* PlantML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PlantML.mlmodel; sourceTree = "<group>"; };
 		7F8CD16929BB98CD0053D493 /* AddPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantView.swift; sourceTree = "<group>"; };
 		7FAC166A29B98F03001C51B9 /* Green Thumb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Green Thumb.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FAC166D29B98F03001C51B9 /* Green_ThumbApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Green_ThumbApp.swift; sourceTree = "<group>"; };
-		7FAC166F29B98F03001C51B9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7FAC166F29B98F03001C51B9 /* ReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceView.swift; sourceTree = "<group>"; };
 		7FAC167129B98F04001C51B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FAC167429B98F04001C51B9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7FAC167B29B98F04001C51B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,11 +97,14 @@
 		7FAC166C29B98F03001C51B9 /* Green Thumb */ = {
 			isa = PBXGroup;
 			children = (
+				7F37C20329C4DABC0047E620 /* DataController.swift */,
 				7F274A5229C3D8FE004D2001 /* ImagePredictor.swift */,
 				7FAC166D29B98F03001C51B9 /* Green_ThumbApp.swift */,
-				7FAC166F29B98F03001C51B9 /* ContentView.swift */,
-				7F1C50DC29BA77C6008780D0 /* PlantCollectionView.swift */,
+				7FAC166F29B98F03001C51B9 /* ReferenceView.swift */,
+				7F1C50DC29BA77C6008780D0 /* ContentView.swift */,
 				7F8CD16929BB98CD0053D493 /* AddPlantView.swift */,
+				7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */,
+				7F2BF04729C3E9C8007DDBE9 /* ImagePredictorButton.swift */,
 				7F1C50DA29BA5A16008780D0 /* PlantBadge.swift */,
 				7FAC168329B98F74001C51B9 /* PlantDetailView.swift */,
 				7FAC168829BA47D6001C51B9 /* RectangleDivider.swift */,
@@ -191,6 +200,8 @@
 			files = (
 				7F8CD16A29BB98CD0053D493 /* AddPlantView.swift in Sources */,
 				7F48840F29C24CEF00611B4C /* PlantML.mlmodel in Sources */,
+				7F2BF04829C3E9C8007DDBE9 /* ImagePredictorButton.swift in Sources */,
+				7F37C1FF29C4D98C0047E620 /* GreenThumb.xcdatamodeld in Sources */,
 				7FAC168229B98F19001C51B9 /* Plant.swift in Sources */,
 				7FAC168729BA4539001C51B9 /* Color_Extension.swift in Sources */,
 				7F274A5329C3D8FE004D2001 /* ImagePredictor.swift in Sources */,
@@ -198,8 +209,9 @@
 				7FAC168929BA47D6001C51B9 /* RectangleDivider.swift in Sources */,
 				7FAC168429B98F74001C51B9 /* PlantDetailView.swift in Sources */,
 				7FAC168B29BA4B1A001C51B9 /* Bundle-Decodable.swift in Sources */,
-				7FAC167029B98F03001C51B9 /* ContentView.swift in Sources */,
-				7F1C50DD29BA77C6008780D0 /* PlantCollectionView.swift in Sources */,
+				7FAC167029B98F03001C51B9 /* ReferenceView.swift in Sources */,
+				7F37C20429C4DABC0047E620 /* DataController.swift in Sources */,
+				7F1C50DD29BA77C6008780D0 /* ContentView.swift in Sources */,
 				7FAC166E29B98F03001C51B9 /* Green_ThumbApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +413,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7F37C1FE29C4D98C0047E620 /* GreenThumb.xcdatamodel */,
+			);
+			currentVersion = 7F37C1FE29C4D98C0047E620 /* GreenThumb.xcdatamodel */;
+			path = GreenThumb.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7FAC166229B98F03001C51B9 /* Project object */;
 }

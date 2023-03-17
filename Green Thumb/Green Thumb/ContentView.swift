@@ -1,71 +1,87 @@
 //
-//  ContentView.swift
+//  PlantCollectionView.swift
 //  Green Thumb
 //
-//  Created by Jared on 3/8/23.
+//  Created by Jared on 3/9/23.
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
     
-    @State var showingPlantView = false
-    @State var showingAddPlantView = false
-    @State var showingCollectionView = false
-    @StateObject var userPlants = UserPlants()
-    @Environment(\.managedObjectContext) private var viewContext
+    // Assign managed object context to property
+    @Environment(\.managedObjectContext) var moc
+    // Fetch plants from CoreData
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.nickName)
+    ]) var userPlants: FetchedResults<UserPlant>
     
-    let plants: [String: Plant] = Bundle.main.decode("plants.json")
+    @State var showingAddView = false
+    @State var showingPlantView = false
+    @Environment(\.dismiss) var dismiss
+    
+    func deleteUserPlants(at offsets: IndexSet) {
+        for offset in offsets {
+            let plant = userPlants[offset]
+            moc.delete(plant)
+        }
+        try? moc.save()
+    }
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVStack(spacing: 4) {
-                    ForEach(Array(plants.values).sorted { $0.name < $1.name } ) { plant in
-                        PlantBadge(plant: plant)
-                            .padding(.horizontal)
-                            .sheet(isPresented: $showingPlantView) {
-                                PlantDetailView(plant: plant)
+            Form {
+                // id: \.name is used when every item is sure to have a unique name
+                // Do not need "id: \.id" if struct is designated Identifiable
+                Section(header: Text("My Plants")) {
+                    ForEach(userPlants) { plant in
+                        HStack {
+                            // TODO: Source clearer, cited plant photos
+                            Image(plant.species ?? "Calathea")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width:50, height:50)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .strokeBorder(.white, lineWidth: 2)
+                                )
+                                .padding()
+                            VStack(alignment: .leading) {
+                                Text("\(plant.nickName ?? "Nickname") ♈️")
+                                    .font(.title3)
+                                Text(plant.info ?? "Description")
                             }
+                        }
                     }
-                    .onTapGesture {
-                        showingPlantView = true
+                    .onDelete(perform: deleteUserPlants)
+                }
+            }
+            // How to change background color?
+            .background(Color.darkGreen)
+            .navigationTitle("My Plants")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        ReferenceView()
+                    } label: {
+                        Image(systemName: "book")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingAddView = true
+                    }) {
+                        Image(systemName: "plus.circle")
                     }
                 }
             }
-            .background(Color.darkGreen)
-            .preferredColorScheme(.dark)
-            .navigationTitle("Green Thumb")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        showingAddPlantView = true
-                    }) {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "plus.circle")
-                        }
-                    }
-                    .sheet(isPresented: $showingAddPlantView) {
-                        AddPlantView(userPlants: UserPlants())
-                    }
-                }
-                // Change to open PlantCollectionView as screen, not sheet
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showingCollectionView = true
-                    }) {
-                        HStack {
-                            Image(systemName: "leaf")
-                            Spacer()
-                        }
-                    }
-                    .sheet(isPresented: $showingCollectionView) {
-                        CollectionView()
-                    }
-                }
+            .sheet(isPresented: $showingAddView) {
+                AddPlantView()
             }
         }
     }
