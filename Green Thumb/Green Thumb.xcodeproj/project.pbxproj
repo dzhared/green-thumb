@@ -14,6 +14,7 @@
 		7F2BF04829C3E9C8007DDBE9 /* ImagePredictorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2BF04729C3E9C8007DDBE9 /* ImagePredictorButton.swift */; };
 		7F37C1FF29C4D98C0047E620 /* GreenThumb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */; };
 		7F37C20429C4DABC0047E620 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F37C20329C4DABC0047E620 /* DataController.swift */; };
+		7F3F57E829C5881F00B6913C /* PlantImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3F57E729C5881F00B6913C /* PlantImage.swift */; };
 		7F48840F29C24CEF00611B4C /* PlantML.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7F48840E29C24CEF00611B4C /* PlantML.mlmodel */; };
 		7F8CD16A29BB98CD0053D493 /* AddPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8CD16929BB98CD0053D493 /* AddPlantView.swift */; };
 		7FA8EFC529C503FA000D04F2 /* AstrologicalSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8EFC429C503FA000D04F2 /* AstrologicalSignView.swift */; };
@@ -36,6 +37,7 @@
 		7F2BF04729C3E9C8007DDBE9 /* ImagePredictorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictorButton.swift; sourceTree = "<group>"; };
 		7F37C1FE29C4D98C0047E620 /* GreenThumb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenThumb.xcdatamodel; sourceTree = "<group>"; };
 		7F37C20329C4DABC0047E620 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		7F3F57E729C5881F00B6913C /* PlantImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantImage.swift; sourceTree = "<group>"; };
 		7F48840E29C24CEF00611B4C /* PlantML.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = PlantML.mlmodel; sourceTree = "<group>"; };
 		7F8CD16929BB98CD0053D493 /* AddPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantView.swift; sourceTree = "<group>"; };
 		7FA8EFC429C503FA000D04F2 /* AstrologicalSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstrologicalSignView.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				7FAC166F29B98F03001C51B9 /* ReferenceView.swift */,
 				7F1C50DC29BA77C6008780D0 /* ContentView.swift */,
 				7F8CD16929BB98CD0053D493 /* AddPlantView.swift */,
+				7F3F57E729C5881F00B6913C /* PlantImage.swift */,
 				7FA8EFC429C503FA000D04F2 /* AstrologicalSignView.swift */,
 				7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */,
 				7F2BF04729C3E9C8007DDBE9 /* ImagePredictorButton.swift */,
@@ -214,6 +217,7 @@
 				7F1C50DB29BA5A16008780D0 /* PlantBadge.swift in Sources */,
 				7FAC168929BA47D6001C51B9 /* RectangleDivider.swift in Sources */,
 				7FAC168429B98F74001C51B9 /* PlantDetailView.swift in Sources */,
+				7F3F57E829C5881F00B6913C /* PlantImage.swift in Sources */,
 				7FAC168B29BA4B1A001C51B9 /* Bundle-Decodable.swift in Sources */,
 				7FAC167029B98F03001C51B9 /* ReferenceView.swift in Sources */,
 				7F37C20429C4DABC0047E620 /* DataController.swift in Sources */,

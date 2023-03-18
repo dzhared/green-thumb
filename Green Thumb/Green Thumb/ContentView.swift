@@ -35,22 +35,24 @@ struct ContentView: View {
                 // Do not need "id: \.id" if struct is designated Identifiable
                 Section(header: Text("My Plants")) {
                     ForEach(userPlants) { plant in
-                        HStack {
-                            // TODO: Source clearer, cited plant photos
-                            Image(plant.species ?? "Calathea")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width:50, height:50)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .strokeBorder(.white, lineWidth: 2)
-                                )
-                                .padding()
-                            VStack(alignment: .leading) {
-                                Text(plant.nickName ?? "Nickname")
-                                    .font(.title3)
-                                Text(plant.info ?? "Description")
+                        NavigationLink(destination: HoroscopeView(plant: plant)) {
+                            HStack {
+                                // TODO: Source clearer, cited plant photos
+                                Image(plant.species ?? "Calathea")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width:75, height:75)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .strokeBorder(.white, lineWidth: 2)
+                                    )
+                                    .padding()
+                                VStack(alignment: .leading) {
+                                    Text("\(plant.nickName ?? "Nickname") \(plant.signEmoji ?? "")")
+                                        .font(.title3)
+                                    Text(plant.info ?? "Description")
+                                }
                             }
                         }
                     }
