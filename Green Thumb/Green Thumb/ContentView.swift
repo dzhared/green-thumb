@@ -31,8 +31,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                // id: \.name is used when every item is sure to have a unique name
-                // Do not need "id: \.id" if struct is designated Identifiable
                 Section(header: Text("My Plants")) {
                     ForEach(userPlants) { plant in
                         NavigationLink(destination: HoroscopeView(plant: plant)) {

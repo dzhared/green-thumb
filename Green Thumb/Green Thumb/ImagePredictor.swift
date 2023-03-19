@@ -9,6 +9,8 @@ import CoreML
 import SwiftUI
 import UIKit
 import Vision
+import Photos
+import PhotosUI
 
 class ImagePredictor {
     static func createImageClassifier() -> VNCoreMLModel {
@@ -16,7 +18,7 @@ class ImagePredictor {
         let defaultConfig = MLModelConfiguration()
         
         // Create instance of image classifier's wrapper class
-        let imageClassifierWrapper = try? PlantML(configuration: defaultConfig)
+        let imageClassifierWrapper = try? GreenThumbML(configuration: defaultConfig)
         
         guard let imageClassifier = imageClassifierWrapper else {
             fatalError("App failed to create an image classifier model instance.")
@@ -33,7 +35,7 @@ class ImagePredictor {
         return imageClassifierVisionModel
     }
     
-    private static let imageClassifier = createImageClassifier()
+    static let imageClassifier = createImageClassifier()
     
     struct Prediction {
         // Name of the object the classifier recognizes in an image
@@ -72,7 +74,7 @@ class ImagePredictor {
         try handler.perform(requests)
     }
     
-    private func visionRequestHandler(_ request: VNRequest, error: Error?) {
+    func visionRequestHandler(_ request: VNRequest, error: Error?) {
         // Remove caller's handler from the dictionary and keep a reference to it
         guard let predictionHandler = predictionHandlers.removeValue(forKey: request) else {
             fatalError("Every request must have a prediction handler.")

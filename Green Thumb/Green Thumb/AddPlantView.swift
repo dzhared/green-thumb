@@ -8,8 +8,22 @@
 import CoreData
 import PhotosUI
 import SwiftUI
+import Vision
 
 struct AddPlantView: View {
+    
+    static func createImageClassifier() -> VNCoreMLModel {
+        let defaultConfig = MLModelConfiguration()
+        let imageClassifierWrapper = try? GreenThumbML(configuration: defaultConfig)
+        guard let imageClassifier = imageClassifierWrapper else {
+            fatalError("Failed to create image classifier model instance.")
+        }
+        let imageClassifierModel = imageClassifier.model
+        guard let imageClassifierVisionModel = try? VNCoreMLModel(for: imageClassifierModel) else {
+            fatalError("Failed to create VNCoreMLModel instance.")
+        }
+        return imageClassifierVisionModel
+    }
     
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
@@ -26,9 +40,10 @@ struct AddPlantView: View {
     }
     
     @State private var prediction: String?
-    @State var selectedItem: PhotosPickerItem?
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var selectedPhotoData: Data?
+    @State private var imagePredictor = ImagePredictor()
     
-    let predictor = ImagePredictor()
     
     let speciesOptions = ["African Violet", "Calathea", "Dracaena", "Ivy", "Pothos", "Snake Plant", "Spider Plant"]
     
@@ -75,15 +90,55 @@ struct AddPlantView: View {
                 
                 Section {
                     // Add ML image ID functionality
-                    PhotosPicker(selection: $selectedItem) {
+                    // PhotosPicker is causing memory leak!
+                    PhotosPicker(selection: $selectedPhoto) {
                         HStack {
                             Spacer()
                             Image(systemName: "camera")
-                            Text("Visual ID")
+                            Text("Pick Photo")
                             Spacer()
                         }
                     }
+                    Text("Predicted Species: \(prediction ?? "N/A")")
+                    Button("Run ML") {
+                        // Get photo data to be converted to image
+                        guard let data = selectedPhotoData else {
+                            return
+                        }
+                        
+                        // Run the image classification request on a background thread
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            do {
+                                let image = UIImage(data: data)
+                                let handler = VNImageRequestHandler(cgImage: image!.cgImage!)
+                                let imageClassificationRequest = VNCoreMLRequest(model: AddPlantView.createImageClassifier(), completionHandler: { request, error in
+                                    guard let results = request.results as? [VNClassificationObservation], let topResult = results.first else {
+                                        return
+                                    }
+                                    DispatchQueue.main.async {
+                                        self.prediction = topResult.identifier
+                                    }
+                                })
+                                try handler.perform([imageClassificationRequest])
+                            } catch {
+                                print("Error: \(error.localizedDescription)")
+                            }
+                        }
+                    }
                 }
+                
+                Section {
+                    Button("Show Photo") {
+
+                    }
+                    if let selectedPhotoData, let image = UIImage(data: selectedPhotoData) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                    }
+                }
+                
                 Section {
                     Button("Save") {
                         // Add plant to library
