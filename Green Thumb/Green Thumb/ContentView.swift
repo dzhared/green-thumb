@@ -73,9 +73,9 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showingAddView = true
-                    }) {
+                    NavigationLink {
+                        AddPlantView()
+                    } label: {
                         Image(systemName: "plus.circle")
                     }
                 }

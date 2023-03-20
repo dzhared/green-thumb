@@ -44,7 +44,6 @@ struct AddPlantView: View {
     @State private var selectedPhotoData: Data?
     @State private var imagePredictor = ImagePredictor()
     
-    
     let speciesOptions = ["African Violet", "Calathea", "Dracaena", "Ivy", "Pothos", "Snake Plant", "Spider Plant"]
     
     var body: some View {
@@ -129,7 +128,6 @@ struct AddPlantView: View {
                 
                 Section {
                     Button("Show Photo") {
-
                     }
                     if let selectedPhotoData, let image = UIImage(data: selectedPhotoData) {
                         Image(uiImage: image)
