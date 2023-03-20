@@ -12,19 +12,6 @@ import Vision
 
 struct AddPlantView: View {
     
-    static func createImageClassifier() -> VNCoreMLModel {
-        let defaultConfig = MLModelConfiguration()
-        let imageClassifierWrapper = try? GreenThumbML(configuration: defaultConfig)
-        guard let imageClassifier = imageClassifierWrapper else {
-            fatalError("Failed to create image classifier model instance.")
-        }
-        let imageClassifierModel = imageClassifier.model
-        guard let imageClassifierVisionModel = try? VNCoreMLModel(for: imageClassifierModel) else {
-            fatalError("Failed to create VNCoreMLModel instance.")
-        }
-        return imageClassifierVisionModel
-    }
-    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
@@ -40,8 +27,8 @@ struct AddPlantView: View {
     }
     
     @State private var prediction: String?
-    @State private var selectedPhoto: PhotosPickerItem?
-    @State private var selectedPhotoData: Data?
+    @State private var photosPickerItem: PhotosPickerItem?
+    @State private var photosPickerItemData: Data?
     @State private var imagePredictor = ImagePredictor()
     
     let speciesOptions = ["African Violet", "Calathea", "Dracaena", "Ivy", "Pothos", "Snake Plant", "Spider Plant"]
@@ -51,11 +38,8 @@ struct AddPlantView: View {
             Form {
                 Section {
                     TextField("Nickname", text: $nickName)
-                        .autocorrectionDisabled()
                         .autocapitalization(.words)
-                        .keyboardType(.default)
                     TextField("Description", text: $info)
-                        .keyboardType(.default)
                     Picker("Species", selection: $species) {
                         ForEach(speciesOptions, id: \.self) {
                             Text($0)
@@ -66,74 +50,23 @@ struct AddPlantView: View {
                         selection: $birthday,
                         displayedComponents: [.date]
                     )
-                    HStack {
-                        Spacer()
-                        ZStack(alignment: .bottomTrailing) {
-                            Image(species)
-                            VStack {
-                                Text(species)
-                                Text("\(sign.0) \(sign.1)")
-                            }
-                            .font(.caption)
-                            .fontWeight(.black)
-                            .padding(8)
-                            .foregroundColor(.white)
-                            .background(.black.opacity(0.75))
-                            .clipShape(Capsule())
-                            .offset(x: -5, y: -5)
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        Spacer()
-                    }
+                    PlantImage(species: species, sign: sign)
                 }
                 
                 Section {
-                    // Add ML image ID functionality
-                    // PhotosPicker is causing memory leak!
-                    PhotosPicker(selection: $selectedPhoto) {
+                    PhotosPicker(selection: $photosPickerItem) {
                         HStack {
-                            Spacer()
                             Image(systemName: "camera")
                             Text("Pick Photo")
-                            Spacer()
                         }
                     }
-                    Text("Predicted Species: \(prediction ?? "N/A")")
-                    Button("Run ML") {
+                    Button("Predict Species") {
                         // Get photo data to be converted to image
-                        guard let data = selectedPhotoData else {
+                        guard let data = photosPickerItemData else {
                             return
                         }
-                        
                         // Run the image classification request on a background thread
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            do {
-                                let image = UIImage(data: data)
-                                let handler = VNImageRequestHandler(cgImage: image!.cgImage!)
-                                let imageClassificationRequest = VNCoreMLRequest(model: AddPlantView.createImageClassifier(), completionHandler: { request, error in
-                                    guard let results = request.results as? [VNClassificationObservation], let topResult = results.first else {
-                                        return
-                                    }
-                                    DispatchQueue.main.async {
-                                        self.prediction = topResult.identifier
-                                    }
-                                })
-                                try handler.perform([imageClassificationRequest])
-                            } catch {
-                                print("Error: \(error.localizedDescription)")
-                            }
-                        }
-                    }
-                }
-                
-                Section {
-                    Button("Show Photo") {
-                    }
-                    if let selectedPhotoData, let image = UIImage(data: selectedPhotoData) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
+                        recognizeImage(from: data)
                     }
                 }
                 
@@ -154,8 +87,54 @@ struct AddPlantView: View {
                     }
                 }
                 .navigationTitle("Add a Plant")
-                .navigationBarTitleDisplayMode(.inline)
+                .onChange(of: photosPickerItem) { selectedPhotosPickerItem in
+                    guard let selectedPhotosPickerItem else {
+                        return
+                    }
+                    Task {
+                        await updatePhotosPickerItem(with: selectedPhotosPickerItem)
+                    }
+                }
             }
+        }
+    }
+    
+    private func updatePhotosPickerItem(with item: PhotosPickerItem) async {
+        photosPickerItem = item
+        if let photoData = try? await item.loadTransferable(type: Data.self) {
+            photosPickerItemData = photoData
+        }
+    }
+    
+    static func createImageClassifier() -> VNCoreMLModel {
+        let defaultConfig = MLModelConfiguration()
+        let imageClassifierWrapper = try? GreenThumbML(configuration: defaultConfig)
+        guard let imageClassifier = imageClassifierWrapper else {
+            fatalError("Failed to create image classifier model instance.")
+        }
+        let imageClassifierModel = imageClassifier.model
+        guard let imageClassifierVisionModel = try? VNCoreMLModel(for: imageClassifierModel) else {
+            fatalError("Failed to create VNCoreMLModel instance.")
+        }
+        return imageClassifierVisionModel
+    }
+    
+    func recognizeImage(from data: Data) {
+        do {
+            let image = UIImage(data: data)
+            let handler = VNImageRequestHandler(cgImage: image!.cgImage!)
+            let imageClassificationRequest = VNCoreMLRequest(model: AddPlantView.createImageClassifier(), completionHandler: { request, error in
+                guard let results = request.results as? [VNClassificationObservation], let topResult = results.first else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.prediction = topResult.identifier
+                    species = topResult.identifier
+                }
+            })
+            try handler.perform([imageClassificationRequest])
+        } catch {
+            print("Error: \(error.localizedDescription)")
         }
     }
 }

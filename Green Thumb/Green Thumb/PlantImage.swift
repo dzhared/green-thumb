@@ -13,21 +13,25 @@ struct PlantImage: View {
     let sign: (String, String)
     
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            Image(species)
-            VStack {
-                Text(species)
-                Text("\(sign.0) \(sign.1)")
+        HStack {
+            Spacer()
+            ZStack(alignment: .bottomTrailing) {
+                Image(species)
+                VStack {
+                    Text(species)
+                    Text("\(sign.0) \(sign.1)")
+                }
+                .font(.caption)
+                .fontWeight(.black)
+                .padding(8)
+                .foregroundColor(.white)
+                .background(.black.opacity(0.75))
+                .clipShape(Capsule())
+                .offset(x: -5, y: -5)
             }
-            .font(.caption)
-            .fontWeight(.black)
-            .padding(8)
-            .foregroundColor(.white)
-            .background(.black.opacity(0.75))
-            .clipShape(Capsule())
-            .offset(x: -5, y: -5)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            Spacer()
         }
-        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 

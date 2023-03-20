@@ -5,16 +5,9 @@
 //  Created by Jared on 3/17/23.
 //
 
-// SwiftUI
-// API Call
-// JSON decoding
-// CoreData
-// CoreML
-// Vision
-
 import SwiftUI
 
-func getSign(date: Date) -> (String, String) {
+func getSign(date: Date) -> (text: String, emoji: String) {
     let year = Calendar.current.component(.year, from: date)
     
     let aquarius: Date = Calendar.current.date(from: DateComponents(year: year, month: 1, day: 21))!
@@ -31,9 +24,9 @@ func getSign(date: Date) -> (String, String) {
     let capricorn = Calendar.current.date(from: DateComponents(year: year, month: 12, day: 21))!
     
     if date >= aquarius && date < pisces {
-        return (text: "Aquarius", emoji: "♒️")
+        return ("Aquarius", "♒️")
     } else if date >= pisces && date < aries {
-        return (text: "Pisces", emoji: "♓️")
+        return ("Pisces", "♓️")
     } else if date >= aries && date < taurus {
         return ("Aries", "♈️")
     } else if date >= taurus && date < gemini {
@@ -58,15 +51,29 @@ func getSign(date: Date) -> (String, String) {
 }
 
 struct HoroscopeView: View {
-    
     let plant: UserPlant
     
     @State private var currentDate = "Current Date"
     @State private var dateRange = "Date Range"
     @State private var description = "Description"
     @State private var mood = "Mood"
-    var sign: String {
-        plant.signString ?? "Aries"
+    var sign: String { plant.signString ?? "Aries" }
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
+                    Text("Sign: \(sign)")
+                    Text("Mood: \(mood)")
+                    Text("Current Date: \(currentDate)")
+                    Text("Description: \(description)")
+                }
+            }
+            .onAppear {
+                getHoroscope()
+            }
+            .navigationTitle("Horoscope \(sign)")
+        }
     }
     
     func getHoroscope() {
@@ -76,9 +83,7 @@ struct HoroscopeView: View {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let session = URLSession.shared
-        
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-            
             guard let data = data, error == nil else {
                 print("Error retrieving data.")
                 return
@@ -98,24 +103,6 @@ struct HoroscopeView: View {
         })
         task.resume()
     }
-    
-    var body: some View {
-        
-        NavigationView {
-            Form {
-                Section {
-                    Text("Sign: \(sign)")
-                    Text("Mood: \(mood)")
-                    Text("Current Date: \(currentDate)")
-                    Text("Description: \(description)")
-                }
-            }
-            .onAppear {
-                getHoroscope()
-            }
-            .navigationTitle("Horoscope")
-        }
-    }
 }
 
 struct Horoscope: Decodable {
@@ -123,10 +110,4 @@ struct Horoscope: Decodable {
     let mood: String
     let dateRange: String
     let description: String
-}
-
-struct HoroscopeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HoroscopeView(plant: UserPlant())
-    }
 }
