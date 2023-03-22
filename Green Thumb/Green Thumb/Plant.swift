@@ -12,6 +12,10 @@ struct Plant: Codable, Identifiable {
     let id: String
     let name: String
     let description: String
-    let wateringRequirements: String
-    let growingMedium: String
+    let water: String
+    let soil: String
+    let temperature: String
+    let humidity: String
+    let light: String
+    let source: String
 }

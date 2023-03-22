@@ -10,19 +10,25 @@ import CoreData
 
 struct ReferenceView: View {
     
+    // MARK: - Properties
+    
     @State var showingPlantDetailView = false
     @State private var plantDetail: Plant?
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
-    let plants: [String: Plant] = Bundle.main.decode("plants.json")
+    var plants: [String: Plant] {
+        Bundle.main.decode("plants.json")
+    }
+    
+    // MARK: - View
     
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 4) {
                     ForEach(Array(plants.values).sorted { $0.name < $1.name } ) { plant in
-                        PlantBadge(plant: plant)
+                        PlantListItem(plant: plant)
                             .padding(.horizontal)
                             .onTapGesture {
                                 plantDetail = plant
@@ -36,7 +42,7 @@ struct ReferenceView: View {
             .navigationTitle("Plant Reference")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showingPlantDetailView) {
-                PlantDetailView(plant: plantDetail ?? Plant(id: "calathea", name: "Calathea", description: "Calathea desc", wateringRequirements: "Calathea water", growingMedium: "Calathea med"))
+                PlantDetailView(plant: plantDetail ?? Plant(id: "calathea", name: "Calathea", description: "Calathea desc", water: "Calathea water", soil: "Calathea med", temperature: "Calathea temp", humidity: "Calathea humidity", light: "Calathea light", source: "Info source"))
             }
         }
     }

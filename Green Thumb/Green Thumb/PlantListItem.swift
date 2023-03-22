@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PlantBadge: View {
+struct PlantListItem: View {
     let plant: Plant
     
     var body: some View {
@@ -40,7 +40,7 @@ struct PlantBadge: View {
 
 struct PlantBadge_Previews: PreviewProvider {
     static var previews: some View {
-        PlantBadge(plant: Plant(id: "calathea", name: "Calathea", description: "Calathea description", wateringRequirements: "Calathea watering requirements", growingMedium: "Calathea growing medium"))
+        PlantListItem(plant: Plant(id: "calathea", name: "Calathea", description: "Calathea desc", water: "Calathea water", soil: "Calathea med", temperature: "Calathea temp", humidity: "Calathea humidity", light: "Calathea light", source: "Info source"))
             .preferredColorScheme(.dark)
     }
 }

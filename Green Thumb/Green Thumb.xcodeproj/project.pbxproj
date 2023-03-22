@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F1C50D929BA527C008780D0 /* plants.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F1C50D829BA527C008780D0 /* plants.json */; };
-		7F1C50DB29BA5A16008780D0 /* PlantBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50DA29BA5A16008780D0 /* PlantBadge.swift */; };
+		7F1C50DB29BA5A16008780D0 /* PlantListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50DA29BA5A16008780D0 /* PlantListItem.swift */; };
 		7F1C50DD29BA77C6008780D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1C50DC29BA77C6008780D0 /* ContentView.swift */; };
 		7F274A5329C3D8FE004D2001 /* ImagePredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F274A5229C3D8FE004D2001 /* ImagePredictor.swift */; };
 		7F37C1FF29C4D98C0047E620 /* GreenThumb.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */; };
@@ -24,14 +24,14 @@
 		7FAC167529B98F04001C51B9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FAC167429B98F04001C51B9 /* Preview Assets.xcassets */; };
 		7FAC168229B98F19001C51B9 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168129B98F19001C51B9 /* Plant.swift */; };
 		7FAC168429B98F74001C51B9 /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168329B98F74001C51B9 /* PlantDetailView.swift */; };
-		7FAC168729BA4539001C51B9 /* Color_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168629BA4539001C51B9 /* Color_Extension.swift */; };
+		7FAC168729BA4539001C51B9 /* Color-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168629BA4539001C51B9 /* Color-Extension.swift */; };
 		7FAC168929BA47D6001C51B9 /* RectangleDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168829BA47D6001C51B9 /* RectangleDivider.swift */; };
 		7FAC168B29BA4B1A001C51B9 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC168A29BA4B1A001C51B9 /* Bundle-Decodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7F1C50D829BA527C008780D0 /* plants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plants.json; sourceTree = "<group>"; };
-		7F1C50DA29BA5A16008780D0 /* PlantBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantBadge.swift; sourceTree = "<group>"; };
+		7F1C50DA29BA5A16008780D0 /* PlantListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListItem.swift; sourceTree = "<group>"; };
 		7F1C50DC29BA77C6008780D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7F274A5229C3D8FE004D2001 /* ImagePredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictor.swift; sourceTree = "<group>"; };
 		7F37C1FE29C4D98C0047E620 /* GreenThumb.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreenThumb.xcdatamodel; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		7FAC167B29B98F04001C51B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FAC168129B98F19001C51B9 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		7FAC168329B98F74001C51B9 /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
-		7FAC168629BA4539001C51B9 /* Color_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_Extension.swift; sourceTree = "<group>"; };
+		7FAC168629BA4539001C51B9 /* Color-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extension.swift"; sourceTree = "<group>"; };
 		7FAC168829BA47D6001C51B9 /* RectangleDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleDivider.swift; sourceTree = "<group>"; };
 		7FAC168A29BA4B1A001C51B9 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +78,8 @@
 		7F48841029C2879200611B4C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7FAC168A29BA4B1A001C51B9 /* Bundle-Decodable.swift */,
+				7FAC168629BA4539001C51B9 /* Color-Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -110,15 +112,13 @@
 				7F37C20329C4DABC0047E620 /* DataController.swift */,
 				7F274A5229C3D8FE004D2001 /* ImagePredictor.swift */,
 				7FAC168129B98F19001C51B9 /* Plant.swift */,
-				7F1C50DA29BA5A16008780D0 /* PlantBadge.swift */,
+				7F1C50DA29BA5A16008780D0 /* PlantListItem.swift */,
 				7FAC168329B98F74001C51B9 /* PlantDetailView.swift */,
 				7F3F57E729C5881F00B6913C /* PlantImage.swift */,
 				7FAC168829BA47D6001C51B9 /* RectangleDivider.swift */,
 				7FAC166F29B98F03001C51B9 /* ReferenceView.swift */,
 				7FA8EFC629C5143F000D04F2 /* horoscopes.json */,
 				7F1C50D829BA527C008780D0 /* plants.json */,
-				7FAC168629BA4539001C51B9 /* Color_Extension.swift */,
-				7FAC168A29BA4B1A001C51B9 /* Bundle-Decodable.swift */,
 				7FAC167129B98F04001C51B9 /* Assets.xcassets */,
 				7F37C1FD29C4D98C0047E620 /* GreenThumb.xcdatamodeld */,
 				7FAC167B29B98F04001C51B9 /* Info.plist */,
@@ -211,9 +211,9 @@
 				7F37C1FF29C4D98C0047E620 /* GreenThumb.xcdatamodeld in Sources */,
 				7FAC168229B98F19001C51B9 /* Plant.swift in Sources */,
 				7FA8EFC529C503FA000D04F2 /* AstrologicalSignView.swift in Sources */,
-				7FAC168729BA4539001C51B9 /* Color_Extension.swift in Sources */,
+				7FAC168729BA4539001C51B9 /* Color-Extension.swift in Sources */,
 				7F274A5329C3D8FE004D2001 /* ImagePredictor.swift in Sources */,
-				7F1C50DB29BA5A16008780D0 /* PlantBadge.swift in Sources */,
+				7F1C50DB29BA5A16008780D0 /* PlantListItem.swift in Sources */,
 				7FAC168929BA47D6001C51B9 /* RectangleDivider.swift in Sources */,
 				7FAC168429B98F74001C51B9 /* PlantDetailView.swift in Sources */,
 				7F3F57E829C5881F00B6913C /* PlantImage.swift in Sources */,

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // Assign managed object context to property
+    // MARK: - Properties
+    
     @Environment(\.managedObjectContext) var moc
-    // Fetch plants from CoreData
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.nickName)
     ]) var userPlants: FetchedResults<UserPlant>
@@ -20,13 +20,7 @@ struct ContentView: View {
     @State var showingPlantView = false
     @Environment(\.dismiss) var dismiss
     
-    func deleteUserPlants(at offsets: IndexSet) {
-        for offset in offsets {
-            let plant = userPlants[offset]
-            moc.delete(plant)
-        }
-        try? moc.save()
-    }
+    // MARK: - View
     
     var body: some View {
         NavigationView {
@@ -41,10 +35,7 @@ struct ContentView: View {
                                     .scaledToFill()
                                     .frame(width:75, height:75)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .strokeBorder(.white, lineWidth: 2)
-                                    )
+                                    .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(.white, lineWidth: 2))
                                     .padding()
                                 VStack(alignment: .leading) {
                                     Text("\(plant.nickName ?? "Nickname") \(plant.signEmoji ?? "")")
@@ -84,6 +75,16 @@ struct ContentView: View {
                 AddPlantView()
             }
         }
+    }
+    
+    // MARK: - Functions
+    
+    func deleteUserPlants(at offsets: IndexSet) {
+        for offset in offsets {
+            let plant = userPlants[offset]
+            moc.delete(plant)
+        }
+        try? moc.save()
     }
 }
 

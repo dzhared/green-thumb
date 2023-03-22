@@ -6,11 +6,9 @@
 //
 
 import CoreML
-import SwiftUI
-import UIKit
-import Vision
-import Photos
 import PhotosUI
+import SwiftUI
+import Vision
 
 class ImagePredictor {
     static func createImageClassifier() -> VNCoreMLModel {

@@ -12,6 +12,8 @@ import Vision
 
 struct AddPlantView: View {
     
+    // MARK: - Properties
+    
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
@@ -19,9 +21,9 @@ struct AddPlantView: View {
     @State private var species: String = "African Violet"
     @State private var info: String = ""
     @State private var birthday: Date = Date()
+    
     @State private var signString: String = "Sign"
     @State private var signEmoji: String = "Emoji"
-    
     var sign: (String, String) {
         getSign(date: birthday)
     }
@@ -60,51 +62,27 @@ struct AddPlantView: View {
                             Text("Pick Photo")
                         }
                     }
-                    Button("Predict Species") {
-                        // Get photo data to be converted to image
-                        guard let data = photosPickerItemData else {
-                            return
-                        }
-                        // Run the image classification request on a background thread
-                        recognizeImage(from: data)
-                    }
                 }
                 
                 Section {
                     Button("Save") {
-                        // Add plant to library
-                        let newUserPlant = UserPlant(context: moc)
-                        newUserPlant.id = UUID()
-                        newUserPlant.nickName = nickName
-                        newUserPlant.info = info
-                        newUserPlant.species = species
-                        newUserPlant.signString = sign.0
-                        newUserPlant.signEmoji = sign.1
-                        
-                        // Save and dismiss
-                        try? moc.save()
-                        dismiss()
+                        savePlant()
                     }
                 }
                 .navigationTitle("Add a Plant")
+                // Run Vision model asynchronously upon changing photo
                 .onChange(of: photosPickerItem) { selectedPhotosPickerItem in
-                    guard let selectedPhotosPickerItem else {
+                    guard let selectedPhotosPickerItem = selectedPhotosPickerItem else {
                         return
                     }
-                    Task {
-                        await updatePhotosPickerItem(with: selectedPhotosPickerItem)
-                    }
+                    updatePhotosPickerItem(with: selectedPhotosPickerItem)
                 }
+                
             }
         }
     }
     
-    private func updatePhotosPickerItem(with item: PhotosPickerItem) async {
-        photosPickerItem = item
-        if let photoData = try? await item.loadTransferable(type: Data.self) {
-            photosPickerItemData = photoData
-        }
-    }
+    // MARK: - Functions
     
     static func createImageClassifier() -> VNCoreMLModel {
         let defaultConfig = MLModelConfiguration()
@@ -137,6 +115,32 @@ struct AddPlantView: View {
             print("Error: \(error.localizedDescription)")
         }
     }
+    
+    private func savePlant() {
+        // Add plant to library
+        let newUserPlant = UserPlant(context: moc)
+        newUserPlant.id = UUID()
+        newUserPlant.nickName = nickName
+        newUserPlant.info = info
+        newUserPlant.species = species
+        newUserPlant.signString = sign.0
+        newUserPlant.signEmoji = sign.1
+        
+        // Save and dismiss
+        try? moc.save()
+        dismiss()
+    }
+    
+    private func updatePhotosPickerItem(with item: PhotosPickerItem) {
+        photosPickerItem = item
+        
+        Task {
+            if let photoData = try? await item.loadTransferable(type: Data.self) {
+                photosPickerItemData = photoData
+                recognizeImage(from: photoData)
+            }
+        }
+    }
 }
 
 struct AddPlantView_Previews: PreviewProvider {
@@ -144,4 +148,5 @@ struct AddPlantView_Previews: PreviewProvider {
         AddPlantView()
     }
 }
+
 

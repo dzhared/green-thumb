@@ -2,50 +2,78 @@
     "calathea": {
         "id": "calathea",
         "name": "Calathea",
-        "description": "This is a description of a Calathea. They're beautiful but they suck shit.",
-        "wateringRequirements": "Watering requirements",
-        "growingMedium": "Growing medium"
+        "description": "Calathea (Calathea picturata) is a evergreen herbaceous perennial that forms 14 to 16 inch high clumps of dramatically colored leaves and is typically grown as a houseplant. The leaves are dark green above, purple below, with silver-colored veins and midriff. This plant can require more that the usual care for houseplants.",
+        "water": "Water with soft water until soil is moist. Watering requirements can be hard to gauge. As a rule of thumb, yellow leaves indicate over watering while leaves curling in on themselves indicates under watering. It can be sensitive to fluoride, so filtered water may be best.",
+        "soil": "Whether grown indoors or outdoors, it prefers well drained potting soil with peat moss and light applications of a diluted fertilizer during the growing season.",
+        "temperature": "The plant is not tolerant of temperatures below 61ºF.",
+        "humidity": "Maintain a uniform, high humidity. Moisten leaves by spraying multiple times per week.",
+        "light": "Keep calathea in partial shade with direct sunlight for only part of the day, about 2-6 hours.",
+        "source": "North Carolina State Extension"
     },
     "snakePlant": {
         "id": "snakePlant",
         "name": "Snake Plant",
-        "description": "The snake plant is an evergreen perennial plant forming dense stands, spreading by way of its creeping rhizome, which is sometimes above ground, sometimes underground. Its stiff leaves grow vertically from a basal rosette. Mature leaves are dark green with light gray-green cross-banding and usually range from 70–90 centimetres (2.3–3.0 ft) long and 5–6 centimetres (2.0–2.4 in) wide, though it can reach heights above 2 m (6 ft) in optimal conditions.",
-        "wateringRequirements": "Watering requirements",
-        "growingMedium": "Growing medium"
+        "description": "Sansevieria trifasciata, commonly called snake plant or mother-in-law’s tongue, is native to tropical western Africa. It is a stemless evergreen perennial that, with proper care, will last for many years. In its native habitat, plant foliage may rise to as much as 4’ tall, but is often smaller (to 2’ tall) on indoor plants.",
+        "water": "Water regularly during the growing season, with significantly reduced watering from fall to late winter. Do not pour water on the center of the rosette.",
+        "soil": "It needs well-drained soil. Choose a cactus potting mix or one with perlite.",
+        "temperature": "",
+        "humidity": "",
+        "light": "Snake plant enjoys bright indirect light but tolerates low-light areas very well. Keep it out of the direct sun, as it can burn.",
+        "source": "University of Florida and Penn State Extension"
     },
     "africanViolet": {
         "id": "africanViolet",
         "name": "African Violet",
         "description": "African violets (Saintpaulia ionantha) are low maintenance, easy to grow houseplants. They reliably bloom several times a year when cared for properly.\n\nNative to Eastern Africa, these popular houseplants are in the same family (Gesneriaceae) as gloxinia and primrose.",
-        "wateringRequirements": "Do not use softened or chlorinated water for African violets. Use room-temperature distilled water, rain water or reverse-osmosis water. Keep the potting mix moist at all times, but not soggy, and never let your plant sit in water.\n\nRoot rot from over watering is one of the most common reasons African violets die.",
-        "growingMedium": "African violets have fine roots and require well-drained soilless potting mixes with a pH of about 6.2 - 6.5.\n\nPre-mixed commercial blends high in peat are available at most retail garden centers.\n\nSome growers recommend a blend of 50% commercial African violet potting mix and 50% perlite.\n\nPlanting containers should have one or more holes in the bottom that allow excess water to drain. Never allow the plant to sit in water.\n\nRe-pot plants in fresh potting mix once a year."
+        "water": "Do not use softened or chlorinated water for African violets. Use room-temperature distilled water, rain water or reverse-osmosis water. Keep the potting mix moist at all times, but not soggy, and never let your plant sit in water.\n\nRoot rot from over watering is one of the most common reasons African violets die.",
+        "soil": "African violets have fine roots and require well-drained soilless potting mixes with a pH of about 6.2 - 6.5.\n\nPre-mixed commercial blends high in peat are available at most retail garden centers.\n\nSome growers recommend a blend of 50% commercial African violet potting mix and 50% perlite.\n\nPlanting containers should have one or more holes in the bottom that allow excess water to drain. Never allow the plant to sit in water.\n\nRe-pot plants in fresh potting mix once a year.",
+        "temperature": "Optimal room temperature for growing African violets is between 60 and 80ºF and ideally 70ºF.",
+        "humidity": "Humidity at 40-60% will help African violets thrive. Group plants together to conserve humidity or set plants on trays of pebbles and water.",
+        "light": "A bright, cool location is best for growing African violets. Windows that provide north, northwest or northeast exposures work well. Fluorescent or LED grow lights may also be used alone or to supplement natural light. Plants need 14-16 hours of light and 8-10 hours of darkness daily to flower.",
+        "source": "University of Minnesota Extension"
     },
     "ivy": {
         "id": "ivy",
         "name": "Ivy",
-        "description": "This is a description of ivy. I like ivy!",
-        "wateringRequirements": "Watering requirements",
-        "growingMedium": "Growing medium"
+        "description": "English ivy (Hedera helix) is a versatile houseplant that can be grown in many different situations. Ivies can be grown in hanging baskets, at the base of other houseplants and in pots of their own. Ivy is often trained on trellis frames or wire topiary forms into various formal or whimsical shapes.",
+        "water": "Water ivies thoroughly, then let the soil dry to the touch to a depth of ½ inch before watering again. Do not allow ivies to stand in water.",
+        "soil": "A good, rich commercial houseplant potting mix will be fine for ivy. They should be planted in a container with good drainage.",
+        "temperature": "Ivies do well at cool to moderate room temperatures of 50 to 70 °F during the day and about 5 to 10 °F lower at night.",
+        "humidity": " Although ivies prefer moderate humidity, they will tolerate normal low home levels. Raise the humidity by setting the plants on a tray of wet pebbles or perlite.",
+        "light": "Most cultivars of ivy grow best in bright light, but not direct sun. They tolerate low to medium light, but growth is reduced and variegated forms may turn all green. To maintain the bright color of a variegated ivy, give it plenty of light. Ivies can be grown with artificial light, or near a north, east or west window.",
+        "source": "Clemson University Extension"
     },
     "spiderPlant": {
         "id": "spiderPlant",
         "name": "Spider Plant",
-        "description": "This is a description of a spider plant.",
-        "wateringRequirements": "Watering requirements",
-        "growingMedium": "Growing medium"
+        "description": "The spider plant (Chlorophytum comosum) is one of the most common houseplants. It is easily grown and is especially popular for the ease and speed with which it forms new plants.",
+        "water": "Spider plants should dry out briefly between waterings. Check their soil daily.",
+        "soil": "A general-purpose potting soil is suitable for spider plants.",
+        "temperature": "Temperatures between 65 and 75ºF during the day and 50 to 55ºF at night are ideal. Move spider plants a few feet from windows to protect them from drafts during the winter.",
+        "humidity": "Average humidity at room temperature is ideal. Low humidity can be harmful to it.",
+        "light": "Spider plants grow best with bright indirect light. They can tolerate some direct sunlight, but midday light may scorch leaves.",
+        "source": "Clemson University Extension"
     },
     "pothos": {
         "id": "pothos",
         "name": "Pothos",
-        "description": "This is a description of a pothos plant.",
-        "wateringRequirements": "Watering requirements",
-        "growingMedium": "Growing medium"
+        "description": "Pothos, also sometimes called devil’s ivy, golden pothos, or hunter’s rove, is one of the most popular house plants in North America. In temperate climates, it can be planted in hanging baskets, used as an underplanting for large potted plants or trees, or grown indoors as a pot plant.",
+        "water": "Plants should be allowed to dry out slightly and watered only when the soil surface feels dry. Root rots, with symptoms of brown or nonexistent roots, are commonly promoted by overwatering.",
+        "soil": "Use a good quality soilless potting mix that drains well.",
+        "temperature": "",
+        "humidity": "",
+        "light": "",
+        "source": "University of Wisconsin Extension, Penn State Extension"
     },
     "dracaena": {
         "id": "dracaena",
         "name": "Dracaena",
-        "description": "This is a description of a dracaena.",
-        "wateringRequirements": "Watering requirements",
-        "growingMedium": "Growing medium"
+        "description": "Dracaenas are generally rugged, carefree houseplants with a robust and tropical appearance. They are widely used for both home and office plantings. Dracaenas are grown for their strap-shaped foliage which is colorfully striped in many of the cultivars.",
+        "water": "Allow dracaenas to dry slightly between waterings. Wait until the soil surface is dry to the touch, then water them thoroughly. Avoid watering with cold water.",
+        "soil": "A standard commercial houseplant potting mix may be used. Feed dracaenas with liquid foliage plant fertilizer once a month during the spring and summer months. Time release fertilizer pellets may be used also.",
+        "temperature": "Dracaenas are best grown in normal house temperatures of 60 to 70ºF during the day. Ideally, night temperatures should be about 10ºF cooler.",
+        "humidity": "Dry tips and edges are usually caused by too little humidity. If the humidity in the house is below 30 to 40 percent, plants will benefit from an occasional misting of their foliage.",
+        "light": "Most dracaenas grow best in bright, indirect light, but many are also tolerant of lower light. If a plant that has been growing in dim light is moved to a brighter spot, the new leaves will be thicker and stronger and growth rate will increase.",
+        "source": "Clemson University Extension"
     }
 }

@@ -7,6 +7,70 @@
 
 import SwiftUI
 
+struct HoroscopeView: View {
+    
+    // MARK: - Properties
+    
+    let plant: UserPlant
+    
+    @State private var currentDate = "Current Date"
+    @State private var dateRange = "Date Range"
+    @State private var description = "Description"
+    @State private var mood = "Mood"
+    var sign: String {
+        plant.signString ?? "Aries"
+    }
+    
+    // MARK: - View
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
+                    Text("Sign: \(sign)")
+                    Text("Mood: \(mood)")
+                    Text("Current Date: \(currentDate)")
+                    Text("Description: \(description)")
+                }
+            }
+            .onAppear {
+                getHoroscope()
+            }
+            .navigationTitle("Horoscope \(sign)")
+        }
+    }
+    
+    // MARK: - Functions
+    
+    func getHoroscope() {
+        let url = URL(string: "https://aztro.sameerkumar.website/?sign=\(sign.lowercased())&day=today")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+            guard let data = data, error == nil else {
+                print("Error retrieving data.")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let result = try decoder.decode(Horoscope.self, from: data)
+                self.description = result.description
+                self.currentDate = result.currentDate
+                self.mood = result.mood
+                self.dateRange = result.dateRange
+            } catch {
+                print("error")
+            }
+        })
+        task.resume()
+    }
+}
+
 func getSign(date: Date) -> (text: String, emoji: String) {
     let year = Calendar.current.component(.year, from: date)
     
@@ -47,61 +111,6 @@ func getSign(date: Date) -> (text: String, emoji: String) {
         return ("Sagittarius", "♐️")
     } else {
         return ("Capricorn", "♑️")
-    }
-}
-
-struct HoroscopeView: View {
-    let plant: UserPlant
-    
-    @State private var currentDate = "Current Date"
-    @State private var dateRange = "Date Range"
-    @State private var description = "Description"
-    @State private var mood = "Mood"
-    var sign: String { plant.signString ?? "Aries" }
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                Section {
-                    Text("Sign: \(sign)")
-                    Text("Mood: \(mood)")
-                    Text("Current Date: \(currentDate)")
-                    Text("Description: \(description)")
-                }
-            }
-            .onAppear {
-                getHoroscope()
-            }
-            .navigationTitle("Horoscope \(sign)")
-        }
-    }
-    
-    func getHoroscope() {
-        let url = URL(string: "https://aztro.sameerkumar.website/?sign=\(sign.lowercased())&day=today")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-            guard let data = data, error == nil else {
-                print("Error retrieving data.")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let result = try decoder.decode(Horoscope.self, from: data)
-                self.description = result.description
-                self.currentDate = result.currentDate
-                self.mood = result.mood
-                self.dateRange = result.dateRange
-            } catch {
-                print("error")
-            }
-        })
-        task.resume()
     }
 }
 

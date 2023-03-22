@@ -9,8 +9,12 @@ import SwiftUI
 
 struct PlantImage: View {
     
+    // MARK: - Properties
+    
     let species: String
     let sign: (String, String)
+    
+    // MARK: - View
     
     var body: some View {
         HStack {
